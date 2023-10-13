@@ -1,0 +1,134 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden;
+}
+
+#banner {
+    width: 100%;
+    height: 90%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#banner .caption {
+    padding: 10px;
+    color: #ffffff;
+    z-index: 20;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    font-weight: bold;
+    background: #ff8800;
+    height: 25%;
+    width: 70%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    clip-path: polygon(0 0, 95% 0, 100% 100%, 5% 100%);
+}
+
+#banner  .caption .down_arrow {
+    font-size: 3rem;
+    cursor: pointer;
+    transform: scale(200%);
+    transform-box: fill-box;
+    transform-origin: center;
+    transition: .25s ease;
+}
+
+#banner  .caption .down_arrow:hover {
+    animation: jump .5s ease;
+}
+#banner video {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    object-fit: cover;
+    z-index: 0;
+}
+
+header {
+    height: 10%;
+    display: flex;
+    justify-content: space-between;
+}
+
+header .left {
+    font-size: 1rem;
+    display: grid;
+    place-items: center;
+    height: 100%;
+    width: 50%;
+    font-family: 'Dela Gothic One', cursive;
+    color: #ff8800;
+}
+
+header .right {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    width: 25%;
+}
+
+header .right .clickable {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    height: 100%;
+    align-items: center;
+    text-decoration: none;
+    color: #000000;
+    transition: .25s ease;
+    font-family: 'Rubik', sans-serif;
+    font-size: 1rem;
+}
+
+header .right .on:hover {
+    background:#ff8800;
+    color: #ffffff;
+    font-family: 'Rubik', sans-serif;
+}
+
+header .right .off {
+    color: #a8a8a8;
+}
+
+header .login {
+    width: 50%;
+}
+header .small {
+    width: 25%;
+}
+
+
+@keyframes jump {
+    0% {
+        transform: translateY(0) rotate(0deg) scale(200%);
+    }
+
+    50% {
+        transform: translateY(-2px) rotate(180deg) scale(250%);
+    }
+
+    0% {
+        transform: translateY(0) rotate(360deg) scale(200%);
+    }
+}
+
+@media (max-width: 800px) {
+    header .clickable p {
+        display: none;
+    }
+}
