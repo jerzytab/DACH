@@ -19,6 +19,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -35,5 +36,16 @@ Route::get('', function () {
 
     return view('welcome', ['table' => $table]);
 });
+
+Route::get('/dashboard', function () {
+
+    $table = DB::table('wycieczki')->get();
+
+    return view('dashboard', ['table' => $table]);
+});
+
+
+
+
 
 require __DIR__.'/auth.php';

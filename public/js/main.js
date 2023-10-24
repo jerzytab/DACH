@@ -3,6 +3,7 @@ const arrow = document.querySelector('.down_arrow');
 const card = document.querySelectorAll('.card');
 const form = document.querySelector(".reservationForm");
 const destination = document.querySelector("#destination");
+const mapBtn =document.querySelector(".mapButton");
 
 //scrolling into view when the arrow is clicked
 arrow.addEventListener('click', ()=> {
@@ -14,9 +15,7 @@ arrow.addEventListener('click', ()=> {
 card.forEach((el)=> {
     let index = el.classList.item(1);
     el.addEventListener('click', () => {
-        form.scrollIntoView({behavior: 'smooth'});
-        destination.value = index;
-        console.log(`googer ${index}`);
+        document.querySelector(".footer").scrollIntoView({behavior: 'smooth'});
     });
 
     let video = el.querySelector("video");
@@ -28,4 +27,6 @@ card.forEach((el)=> {
         video.pause();
     });
 })
+
+
 
