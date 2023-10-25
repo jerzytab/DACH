@@ -18,3 +18,42 @@
     flex-flow: row wrap;
     gap: 20px;
 }
+.reservationForm label {
+    color: #ffffff;
+    font-size: 2rem;
+    font-family: 'Bebas Neue', sans-serif;
+}
+.reservationForm input {
+    border: none;
+    background: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    font-family: 'Rubik', sans-serif;
+    height: 50px;
+    transition: .5s ease;
+    color: #000000;
+}
+
+.reservationForm input:focus {
+    outline: none;
+    background: #ffffff;
+    color: #000000;
+    transform: scale(110%);
+}
+.reservationForm select {
+    border: none;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.8);
+    font-family: 'Rubik', sans-serif;
+    height: 50px;
+    transition: .5s ease;
+    color: #000000;
+}
+
+.reservationForm select:focus {
+    outline: none;
+    background: #ffffff;
+    transform: scale(105%);
+}
+
+
+

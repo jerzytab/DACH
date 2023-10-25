@@ -97,7 +97,6 @@ header .right .clickable {
 
 header .right .on:hover {
     background:#ff8800;
-    color: #ffffff;
     font-family: 'Rubik', sans-serif;
 }
 

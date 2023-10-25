@@ -12,3 +12,35 @@
     width: 80%;
     border-bottom: 25px solid #ff8000;
 }
+
+.mapBtn {
+    background: #ff8000;
+    color: #ffffff;
+    border: none;
+    width: 50%;
+    height: 40px;
+    font-size: 1.5rem;
+    font-family: 'Bebas Neue', sans-serif;
+    transition: .5s ease;
+}
+
+.mapBtn:hover {
+    transform: scale(110%);
+}
+
+.leaflet-popup-content {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.leaflet-popup-content h3{
+    font-family: 'Dela Gothic One', cursive;
+    color: #ff8000;
+    font-size: 1.5rem;
+}
+
+.leaflet-popup-content p{
+    font-family: 'Rubik', sans-serif;
+}

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>DACH</title>
-    
+
     <link rel="stylesheet" href="{{ asset('css/banner.css') }}">
     <link rel="stylesheet" href="{{ asset('css/reservation.css') }}">
     <link rel="stylesheet" href="{{ asset('css/imports.css') }}">
@@ -20,22 +20,12 @@
             <h1>DACHtravel</h1>
         </div>
         <div class="right">
-            <a href="#" class="clickable on small"><span class="material-symbols-outlined">map</span></a>
             @if (Route::has('login'))
                 <div class="clickable">
-                    @auth
-                        <!-- <a href="{{ url('/dashboard') }}" class="material-symbols-outlined">Dashboard</a> -->
-                        <a href="#" class="clickable off small"><span class="material-symbols-outlined">favorite</span></a>
-                    @else
                         <a href="{{ route('login') }}" class="clickable on"><span class="material-symbols-outlined">person</span><p>zaloguj się</p></a>
-
-                        <!-- @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class=""><p>Register</p></a>
-                        @endif -->
-                    @endauth
                 </div>
             @endif
-        
+
         </div>
     </header>
 
@@ -52,17 +42,17 @@
     <section class="main">
         <h1 class="invitation">Zwiedź je z nami!</h1>
         <div class="countryCards">
-            <div class="card de 1">
+            <div class="card niemcy 1">
                     <video src="./assets/video/pexels-zlatin-georgiev-5608244%20(2160p).mp4" class="cardVideo" muted loop></video>
                 <div class="rest"><h3 class="countryName">Niemcy</h3></div>
             </div>
 
-            <div class="card at 2">
+            <div class="card austria 2">
                 <video src="./assets/video/production_id%204922982%20(2160p).mp4" class="cardVideo" muted loop></video>
                 <div class="rest"><h3 class="countryName">Austria</h3></div>
             </div>
 
-            <div class="card ch 3">
+            <div class="card szwajcaria 3">
                 <video src="./assets/video/video%20(1080p).mp4" class="cardVideo" muted loop></video>
                 <div class="rest"><h3 class="countryName">Szwajcaria</h3></div>
             </div>
@@ -73,7 +63,7 @@
     <section class="reservation">
         <form class="reservationForm">
             <label>typ wyjazdu
-                <select>
+                <select class="formEl">
                     <option value="" selected disabled></option>
                     <option value="allin">all-inclusive</option>
                     <option value="nofood">bez wyżywienia</option>
@@ -81,22 +71,22 @@
                 </select>
             </label>
             <label>destynacja
-                <select id="destination">
+                <select id="destination" class="formEl">
                     <option value="" selected disabled></option>
-                    <option value="de">Niemcy</option>
-                    <option value="at">Austria</option>
-                    <option value="ch">Szwajcaria</option>
+                    <option value="Niemcy">Niemcy</option>
+                    <option value="Austria">Austria</option>
+                    <option value="Szwajcaria">Szwajcaria</option>
                 </select>
             </label>
             <label>zakwaterowanie
-                <select>
+                <select class="formEl">
                     <option value="" selected disabled></option>
                     <option value="hotel">hotel</option>
                     <option value="apartment">apartament</option>
                 </select>
             </label>
             <label>dojazd
-                <select>
+                <select class="formEl">
                     <option value="" selected disabled></option>
                     <option value="plane">samolot</option>
                     <option value="car">samochód (dojazd własny)</option>
@@ -105,16 +95,16 @@
                 </select>
             </label>
             <label>data wyjazdu
-                <input type="date" name="dateStart" id="tripStartDate">
+                <input type="date" name="dateStart" id="tripStartDate" class="formEl">
             </label>
             <label>data powrotu
-                <input type="date" name="dateEnd" id="tripEndDate">
+                <input type="date" name="dateEnd" id="tripEndDate" class="formEl">
             </label>
             <label>dorośli
-                <input type="number" name="adults" id="adults" min="0">
+                <input type="number" name="adults" id="adults" min="0" class="formEl">
             </label>
             <label>dzieci
-                <input type="number" name="adults" id="children" min="0">
+                <input type="number" name="adults" id="children" min="0" class="formEl">
             </label>
         </form>
     </section>
@@ -122,18 +112,36 @@
     <section class="mapSection">
         <div id="map"></div>
     </section>
-    @foreach($table as $key => $data)
-    <tr>    
-      <th>{{$data->kraj}}</th>
-      <th>{{$data->miejsce}}</th>                 
-    </tr>
-    @endforeach
 
     <script src="./js/main.js"></script>
     <!-- Make sure you put this AFTER Leaflet's CSS -->
  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
      crossorigin=""></script>
-     <script src="./js/map.js"></script>
+{{--     <script src="./js/map.js"></script>--}}
+<script>
+    var map = L.map('map').setView([51.505, -0.09], 13);
+
+    function test(id, country) {
+        document.querySelector(".reservation").scrollIntoView({behavior: "smooth"});
+        const destination = document.querySelector("#destination");
+        console.log(destination.value + ", " + country);
+        destination.value = country;
+    }
+
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+    map.flyTo(new L.LatLng(48.208176, 16.373819));
+
+
+    const myServices = [];
+    @foreach ($table as $service)
+    L.marker([{{$service->lat}}, {{$service->lng}}]).addTo(map)
+        .bindPopup("<h3 class='place'>{{$service->miejsce}}</h3><br /><p>{{$service->opis}}</p> <br /> <button class='mapBtn {{$service->id}}' onclick='test({{$service->id}},`{{$service->kraj}}`)'>zamów!</button>")
+    @endforeach
+</script>
+<footer class="footer"></footer>
 </body>
 </html>
