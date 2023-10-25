@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\RezerwacjaController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 
@@ -41,8 +43,14 @@ Route::get('/dashboard', function () {
 
     $table = DB::table('wycieczki')->get();
 
-    return view('dashboard', ['table' => $table]);
+    return view('layouts.app', ['table' => $table]);
 });
+
+Route::get('/reserved', function() {
+    return view('reserved');
+});
+
+Route::post('', [RezerwacjaController::class, 'dataInsert'])->name('dataInsert');
 
 
 

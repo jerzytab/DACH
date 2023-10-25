@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Paź 24, 2023 at 07:41 PM
+-- Generation Time: Paź 25, 2023 at 09:38 AM
 -- Wersja serwera: 10.4.28-MariaDB
 -- Wersja PHP: 8.2.4
 
@@ -100,6 +100,25 @@ CREATE TABLE `personal_access_tokens` (
 -- --------------------------------------------------------
 
 --
+-- Struktura tabeli dla tabeli `rezerwacje`
+--
+
+CREATE TABLE `rezerwacje` (
+  `typ_wyjazdu` varchar(50) DEFAULT NULL,
+  `destynacja` varchar(50) DEFAULT NULL,
+  `data_wyjazdu` date NOT NULL,
+  `data_powrot` date NOT NULL,
+  `dorosli` int(11) NOT NULL,
+  `dzieci` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `id_rezerwacji` int(11) NOT NULL,
+  `zakwaterowanie` varchar(50) DEFAULT NULL,
+  `dojazd` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Struktura tabeli dla tabeli `users`
 --
 
@@ -121,7 +140,9 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'paczesny', 'kelere6223@dixiser.com', NULL, '$2y$10$/0lJ0pi8Hb4Qin6VQpU1/OK.QLs7lnMzXq1GE4.7S/PnDcZV.G0rO', NULL, '2023-10-16 05:27:34', '2023-10-16 05:27:34'),
 (2, 'kabrzmił', 'bum@bum.pl', NULL, '$2y$10$jV2DmfYCy8zzlNxT//.0eOs6yd0OuPZSJ4OShcMgIuruY8rK7FPxK', NULL, '2023-10-24 13:36:45', '2023-10-24 13:36:45'),
-(3, 'hejo', 'km.dartmoor3@gmail.com', NULL, '$2y$10$00WRcGjywWkxJMnoVQrQ4eaThtQ2OCUaxvTHwup66TxWxwCPved6e', NULL, '2023-10-24 15:02:12', '2023-10-24 15:02:12');
+(3, 'hejo', 'km.dartmoor3@gmail.com', NULL, '$2y$10$00WRcGjywWkxJMnoVQrQ4eaThtQ2OCUaxvTHwup66TxWxwCPved6e', NULL, '2023-10-24 15:02:12', '2023-10-24 15:02:12'),
+(4, 'test', 'test@test.pl', NULL, '$2y$10$6UcM.KaQYcmD2dngdXgKG.natQXLLicXMMPGINsvInGsCVjWcqcou', NULL, '2023-10-25 04:57:54', '2023-10-25 04:57:54'),
+(5, 'TWÓJSTAWRY', 'ufjdshujf@jhdsijfhdsij.pl', NULL, '$2y$10$DX2WqmKq9AYoWhTa1AsdzuTMrn1fXgXf3rCoTpgyxuZworBljE7sS', NULL, '2023-10-25 05:37:52', '2023-10-25 05:37:52');
 
 -- --------------------------------------------------------
 
@@ -188,6 +209,12 @@ ALTER TABLE `personal_access_tokens`
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
+-- Indeksy dla tabeli `rezerwacje`
+--
+ALTER TABLE `rezerwacje`
+  ADD PRIMARY KEY (`id_rezerwacji`);
+
+--
 -- Indeksy dla tabeli `users`
 --
 ALTER TABLE `users`
@@ -223,10 +250,16 @@ ALTER TABLE `personal_access_tokens`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `rezerwacje`
+--
+ALTER TABLE `rezerwacje`
+  MODIFY `id_rezerwacji` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -55,5 +55,11 @@
     transform: scale(105%);
 }
 
+.reserved {
+    font-size: 3rem;
+    color: #ffffff;
+    font-family: 'Bebas Neue', sans-serif;
+}
+
 
 
